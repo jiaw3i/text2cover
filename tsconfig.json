@@ -1,0 +1,61 @@
+{
+  "version": "2.0.2",
+  "compilerOptions": {
+    /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+    //指定ECMAScript目标版本：'ES3'(默认),'ES5','ES2015','ES2016','ES2017','ES2018','ES2019'或'ESNEXT'。,
+    "target": "ESNext",
+    /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    // 指定模块代码生成：'none','commonjs','amd','system','umd','es2015'或'ESNext'。
+    "module": "commonjs",
+    /* Generates corresponding '.d.ts' file. */
+    // 生成相应的'.d.ts'文件。
+    "declaration": true,
+    /* Generates corresponding '.map' file. */
+    // 生成相应的'.map'文件。
+    "sourceMap": true,
+    /* Redirect output structure to the directory. */
+    // 重定向输出结构到目录。
+    "outDir": "./dist",
+    /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    // 指定输入文件的根目录。使用--outDir控制输出目录结构。
+    "rootDir": "./src",
+    /* Import emit helpers from 'tslib'. */
+    // 从'tslib'导入发射助手。
+    "importHelpers": true,
+    /* Enable all strict type-checking options. */
+    // 启用所有严格的类型检查选项。
+    "strict": true,
+    /* Raise error on expressions and declarations with an implied 'any' type. */
+    // 在具有隐含'any'类型的表达式和声明上引发错误。
+    "noImplicitAny": false,
+    /* List of folders to include type definitions from. */
+    // 包含类型定义的文件夹列表。
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    // 通过为所有导入创建命名空间对象，启用CommonJS和ES模块之间的发射互操作性。暗示'allowSyntheticDefaultImports'。
+    "esModuleInterop": true,
+    /* Enables experimental support for ES7 decorators. */
+    // 启用ES7装饰器的实验性支持。
+    "experimentalDecorators": true,
+    /* Enables experimental support for emitting type metadata for decorators. */
+    // 启用装饰器的实验性支持，以发出类型元数据。
+    "emitDecoratorMetadata": true,
+    /* Disallow inconsistently-cased references to the same file. */
+    // 不允许对同一文件的引用不一致。
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "tslib": [
+        "path/to/node_modules/tslib/tslib.d.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
+}
