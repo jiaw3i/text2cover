@@ -1,4 +1,4 @@
-const {HttpException} = require('../common/http-exception')
+import HttpException from "../common/http-exception";
 
 /**
  * 全局异常处理

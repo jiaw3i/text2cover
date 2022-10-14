@@ -38,10 +38,7 @@ class InitManager {
                 const mod: Router = require(file);
                 if (mod instanceof Router) {
                     console.info(`loading a router instance from file: ${file}`);
-                    let lodashVal = get(mod, "stack", []);
-                    // get(mod, "stack", []).forEach((ly: Router.Layer) => {
-                    //     console.info(`loading a route: ${get(ly, "path")}`);
-                    // });
+                    // 将机械出来的路由应用到app对象中
                     this.app.use(mod.routes()).use(mod.allowedMethods());
                 }
             }

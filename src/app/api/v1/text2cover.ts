@@ -6,6 +6,7 @@
 
 import Router from 'koa-router';
 import Resolve from "../../lib/resphandler";
+import {text2cover} from "../../service/text2cover";
 
 const res = new Resolve();
 
@@ -13,11 +14,18 @@ const router: Router = new Router({
     prefix: '/v1/text2cover'
 });
 
-router.get('/do', async (ctx, next) => {
+router.post('/do', async (ctx, next) => {
+    // ctx.accepts('application/json');
+    let params;
+
+    let param = ctx.request.body;
+
+    console.log(param.text)
+    let base64 = text2cover(param.text);
     ctx.body = {
         code: 200,
         success: true,
-        message: '文字转封面'
+        message: base64
     }
 });
 
