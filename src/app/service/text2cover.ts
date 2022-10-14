@@ -29,8 +29,8 @@ function toRadians(angle) {
  */
 function createBackground() {
     let size = {
-        width: 300,
-        height: 150
+        width: 800,
+        height: 400
     }
     let len = gradients.length;
     let gradientObj = gradients[Math.floor(Math.random() * len)];
@@ -58,21 +58,16 @@ function createSvg(text:string){
         maxSize: 30,
     }
     const size = {
-        width: 300,
-        height: 150
+        width: 800,
+        height: 400
     }
 
-    // get random font
-    let len = fonts.length;
-    let font = fonts[Math.floor(Math.random() * len)];
     // get random font size within range
     let fontSize = Math.floor(Math.random() * (fontSizeRange.maxSize - fontSizeRange.minSize + 1) + fontSizeRange.minSize);
     let fontColor = '#000000';
-    return Buffer.from(`
-    <svg width="${size.width}" height="${size.height}" xmlns="http://www.w3.org/2000/svg">
+    return Buffer.from(`<svg width="${size.width}" height="${size.height}" xmlns="http://www.w3.org/2000/svg">
         <text x="50%" y="50%"  fill="${fontColor}" font-size="${fontSize}" font-weight="600" font-family="Times New Roman" text-anchor="middle" dominant-baseline="middle">
         ${text}
         </text>
-    </svg>
-    `);
+    </svg>`);
 }

@@ -3,7 +3,6 @@ import Koa from 'koa';
 import config from "../config/config";
 import HttpException, {NotFound, ParameterException} from "./http-exception"
 import fs from "fs";
-import get from "lodash";
 
 class InitManager {
     private static app: Koa;
@@ -22,7 +21,6 @@ class InitManager {
     // 加载所有路由
     static initLoadRouters() {
         // 路由自动加载
-        const mainRouter: Router = new Router();
         const path: string = `${process.cwd()}/src/app/api/v1`;
         const files: string[] = getFiles(path);
         for (let file of files) {

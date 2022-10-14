@@ -11,10 +11,10 @@ import {text2cover} from "../../service/text2cover";
 const res = new Resolve();
 
 const router: Router = new Router({
-    prefix: '/v1/text2cover'
+    prefix: '/text2cover'
 });
 
-router.post('/do', async (ctx, next) => {
+router.post('/', async (ctx, next) => {
     // ctx.accepts('application/json');
     let params;
 
