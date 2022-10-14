@@ -23,7 +23,7 @@ class InitManager {
     static initLoadRouters() {
         // 路由自动加载
         const mainRouter: Router = new Router();
-        const path: string = `${process.cwd()}\\src\\app\\api\\v1`;
+        const path: string = `${process.cwd()}/src/app/api/v1`;
         const files: string[] = getFiles(path);
         for (let file of files) {
             // 获取文件后缀名
