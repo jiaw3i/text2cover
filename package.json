@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "canvas": "^2.10.1",
+    "cos-nodejs-sdk-v5": "^2.11.12",
     "glob": "^8.0.3",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
@@ -19,7 +20,11 @@
   "description": "",
   "version": "1.0.0",
   "devDependencies": {
-    "@types/node": "^18.8.5"
+    "@types/koa": "^2.13.5",
+    "@types/koa-bodyparser": "^4.3.8",
+    "@types/koa-router": "^7.4.4",
+    "@types/node": "^18.8.5",
+    "@types/sharp": "^0.31.0"
   },
   "scripts": {
     "start": "nodemon -e ts,tsx --exec ts-node ./src/app.ts",

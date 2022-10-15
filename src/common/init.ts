@@ -3,6 +3,7 @@ import Koa from 'koa';
 import config from "../config/config";
 import HttpException, {NotFound, ParameterException} from "./http-exception"
 import fs from "fs";
+import {CosClient} from "../app/lib/cos";
 
 class InitManager {
     private static app: Koa;
@@ -16,6 +17,8 @@ class InitManager {
         InitManager.loadHttpException();
         // 加载配置文件
         InitManager.loadConfig();
+        // 初始化cos
+        InitManager.initCos();
     }
 
     // 加载所有路由
@@ -34,11 +37,8 @@ class InitManager {
                 // 并检测文件是否是koa的路由
                 // 如果是路由便将路由加载
                 const mod: Router = require(file);
-                if (mod instanceof Router) {
-                    console.info(`loading a router instance from file: ${file}`);
-                    // 将机械出来的路由应用到app对象中
-                    this.app.use(mod.routes()).use(mod.allowedMethods());
-                }
+                console.info(`loading a router instance from file: ${file}`);
+                this.app.use(mod.routes()).use(mod.allowedMethods());
             }
         }
     }
@@ -51,6 +51,17 @@ class InitManager {
     // 加载异常类
     static loadHttpException() {
         global.errs = [HttpException, ParameterException, NotFound];
+    }
+
+    private static initCos() {
+        let cosConfig = global.config.cos;
+        CosClient.init({
+            SecretId: cosConfig.secretId,
+            SecretKey: cosConfig.secretKey,
+            Bucket: cosConfig.bucket,
+            Region: cosConfig.region
+
+        });
     }
 }
 

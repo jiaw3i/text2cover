@@ -20,12 +20,13 @@ router.post('/', async (ctx, next) => {
 
     let param = ctx.request.body;
 
-    console.log(param.text)
-    let base64 = text2cover(param.text);
+    console.log(param?.text)
+    let url = await text2cover(param?.text as string);
     ctx.body = {
         code: 200,
         success: true,
-        message: base64
+        message: "链接生成成功，2分钟内有效",
+        data: url
     }
 });
 

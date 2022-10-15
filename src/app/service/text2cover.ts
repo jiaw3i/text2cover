@@ -1,7 +1,9 @@
 import {createCanvas} from "canvas";
 import sharp from 'sharp';
 import {gradients} from "../lib/gradient";
-import {fonts} from "../lib/font";
+import {CosClient} from "../lib/cos";
+import fs from "fs";
+import COS from "cos-nodejs-sdk-v5";
 
 
 export async function text2cover(text: string, options: any = {}): Promise<string> {
@@ -9,14 +11,37 @@ export async function text2cover(text: string, options: any = {}): Promise<strin
     let textSvg = createSvg(text);
     let gradientBuffer = createBackground();
 
+    let filename = `${text}_${Date.now()}.png`;
+
     // await sharp(Buffer.from(textSvg)).toFile('text.png');
     // await sharp(gradientBuffer).toFile('background.png');
     await sharp(gradientBuffer)
         .composite([
             {input: Buffer.from(textSvg), gravity: 'center'}
-        ]).toFile('combine.png');
+        ]).toFile(filename);
 
-    return '';
+    let file = {
+        name: filename,
+        data: fs.createReadStream(filename),
+    };
+    await CosClient.uploadFile(file);
+    let filePath = `text2cover/${filename}`;
+    let signAuthorization = CosClient.getSignAuthorization(filePath);
+    let objUrl = CosClient.cos.getObjectUrl({
+        Bucket: CosClient.config.Bucket,
+        Region: CosClient.config.Region,
+        Key: filePath,
+        Sign: true,
+        Expires: 60 * 2,
+        Headers: {
+            Authorization: signAuthorization,
+        }
+    }, function (err, data) {
+        console.log(err || data.Url);
+    });
+
+
+    return objUrl;
 }
 
 // Degrees to radians
@@ -52,9 +77,9 @@ function createBackground() {
  * 创建文字svg
  * @param text 文字
  */
-function createSvg(text:string){
+function createSvg(text: string) {
     const fontSizeRange = {
-        minSize:15,
+        minSize: 15,
         maxSize: 30,
     }
     const size = {
