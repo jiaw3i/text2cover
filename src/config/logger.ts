@@ -9,12 +9,12 @@ log4js.configure({
     appenders: {
         access: {
             type: 'dateFile',
-            filename: path.join('/data', '/logs/text2cover/access.log'),
+            filename: 'logs/access.log',
             pattern: '-yyyy-MM-dd',
         },
         application: {
             type: 'dateFile',
-            filename: path.join('/data', '/logs/text2cover/application.log'),
+            filename: 'logs/application.log',
             pattern: '-yyyy-MM-dd',
         },
         out: {
@@ -22,12 +22,15 @@ log4js.configure({
         }
     },
     categories: {
-        default: {appenders: ['out'], level: 'debug'},
+        default: {appenders: ['out'], level: 'info'},
         access: {appenders: ['access'], level: 'info'},
-        application: {appenders: ['application'], level: 'WARN'}
+        application: {appenders: ['application'], level: 'info'}
     }
 });
 
 
 export const logger = log4js.getLogger('application');
 export const accessLogger = log4js.koaLogger(log4js.getLogger('access'));
+
+// exports.accessLogger = () => log4js.koaLogger(log4js.getLogger('access')); //记录所有访问级别的日志
+// exports.logger = log4js.getLogger('application'); //记录所有应用级别的日志

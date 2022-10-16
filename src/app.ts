@@ -30,7 +30,7 @@ app.use(cors({
 app.use(bodyParser());
 // 错误处理
 app.use(catchError);
-app.use(accessLogger());
+app.use(accessLogger);
 const db = new Map();
 // 限流中间件 rate-limit
 app.use(rateLimit({
