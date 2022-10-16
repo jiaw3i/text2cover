@@ -34,8 +34,9 @@ export class CosClient {
                 console.log(JSON.stringify(progressData));
             }
         };
+        logger.info("cos put object params=", params);
         let result = await this.cos.putObject(params);
-        logger.info("cos put object result=",result);
+        logger.info("cos put object result=", result);
         return result.Location;
     }
 
