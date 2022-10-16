@@ -1,4 +1,5 @@
 import COS from 'cos-nodejs-sdk-v5';
+import {logger} from "../../config/logger";
 
 export class CosClient {
     /**
@@ -34,6 +35,7 @@ export class CosClient {
             }
         };
         let result = await this.cos.putObject(params);
+        logger.info("cos put object result=",result);
         return result.Location;
     }
 

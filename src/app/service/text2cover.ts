@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import {gradients} from "../lib/gradient";
 import {CosClient} from "../lib/cos";
 import fs from "fs";
-import COS from "cos-nodejs-sdk-v5";
+import {logger} from "../../config/logger";
 
 
 export async function text2cover(text: string, options: any = {}): Promise<string> {
@@ -13,8 +13,6 @@ export async function text2cover(text: string, options: any = {}): Promise<strin
 
     let filename = `${text}_${Date.now()}.png`;
 
-    // await sharp(Buffer.from(textSvg)).toFile('text.png');
-    // await sharp(gradientBuffer).toFile('background.png');
     await sharp(gradientBuffer)
         .composite([
             {input: Buffer.from(textSvg), gravity: 'center'}
@@ -27,7 +25,7 @@ export async function text2cover(text: string, options: any = {}): Promise<strin
     await CosClient.uploadFile(file);
     let filePath = `text2cover/${filename}`;
     let signAuthorization = CosClient.getSignAuthorization(filePath);
-    let objUrl = CosClient.cos.getObjectUrl({
+    return CosClient.cos.getObjectUrl({
         Bucket: CosClient.config.Bucket,
         Region: CosClient.config.Region,
         Key: filePath,
@@ -37,11 +35,8 @@ export async function text2cover(text: string, options: any = {}): Promise<strin
             Authorization: signAuthorization,
         }
     }, function (err, data) {
-        console.log(err || data.Url);
+        logger.info(err || data.Url);
     });
-
-
-    return objUrl;
 }
 
 // Degrees to radians

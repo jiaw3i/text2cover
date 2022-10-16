@@ -5,6 +5,7 @@
     "glob": "^8.0.3",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
+    "koa-log4": "^2.3.2",
     "koa-ratelimit": "^5.0.1",
     "koa-router": "^12.0.0",
     "koa2-cors": "^2.0.6",

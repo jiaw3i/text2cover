@@ -5,19 +5,16 @@
  */
 
 import Router from 'koa-router';
-import Resolve from "../../lib/resphandler";
 import {text2cover} from "../../service/text2cover";
-
-const res = new Resolve();
+import {logger} from "../../../config/logger";
 
 const router: Router = new Router({
     prefix: '/text2cover'
 });
 
 router.post('/', async (ctx, next) => {
-    // ctx.accepts('application/json');
-    let params;
 
+    logger.info('request text2cover api~');
     let param = ctx.request.body;
 
     console.log(param?.text)
