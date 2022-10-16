@@ -9,12 +9,12 @@ log4js.configure({
     appenders: {
         access: {
             type: 'dateFile',
-            filename: path.join('/data', '/logs/text2cover/access.log'),
+            filename: path.join(__dirname, '../../logs/text2cover/access.log'),
             pattern: '-yyyy-MM-dd',
         },
         application: {
             type: 'dateFile',
-            filename: path.join('/data', '/logs/text2cover/application.log'),
+            filename: path.join(__dirname, '../../logs/text2cover/application.log'),
             pattern: '-yyyy-MM-dd',
         },
         out: {
